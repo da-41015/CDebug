@@ -116,8 +116,6 @@ private: //members
 	int m_inLineQuantity;
     int m_cInLineCalls;
 
-	int m_maxTableWidth;
-
     std::string m_inlineBuffer;
     bool m_enableAutoSpacing;
 
@@ -136,10 +134,6 @@ void Debug::Line(Arg&& arg, Args&&... args) {
                               << std::forward<Args>(args)),0)...};
 
     std::string res = ss.str();
-
-	if (res.size() >= m_maxTableWidth) {
-		res.insert(m_maxTableWidth, "\n");
-	}
 
     SaveInput(res);
 }
