@@ -258,7 +258,10 @@ std::vector<std::size_t> Debug::Section::GetTabsPositions(const std::string &tar
 }
 // ------------------------------------------------- DEBUG REALIZATION -----------------------------------------------
 
-Debug::Debug(const std::string &subject):m_subject(subject), m_enableAutoSpacing(true) {
+Debug::Debug(const std::string &subject):m_subject(subject), 
+										 m_enableAutoSpacing(true),
+										 m_maxTableWidth(DEFAULT_TABLE_MAXWIDTH) 
+{
     m_subject = DEFAULT_HEADER_STRING + m_subject;
     m_metrics.setWidth(DEFAULT_LINE_LENGTH + subject.size() + DEFAULT_HEADER_STRING.size());
     m_sections.push_back(Section(m_metrics));

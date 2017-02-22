@@ -2,7 +2,8 @@
 #include <string>
 #include <iostream>
 
-int main() {
+int main() { 
+/*
 Debug d("main");
 	
 	d.Line("Example line");
@@ -25,6 +26,14 @@ d.NewSection(true, "Tabulations sample");
 	for (int i = 0; i < 16; ++i) {
 		d.InLine(i, "\t");
 	}
+
 d.End();
+	std::cin.get();
+*/
+
+	std::string s(150, 'c');
+	Debug d("lalala");
+	d.Line(s);
+	d.End();
 	std::cin.get();
 }

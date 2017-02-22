@@ -84,7 +84,9 @@ private: //definitions
     };
 
     typedef std::list<Section> SectionList;
-    enum {DEFAULT_LINE_LENGTH = 20};
+    enum {DEFAULT_LINE_LENGTH = 20,
+	      DEFAULT_TABLE_MAXWIDTH = 128};
+	
     static const std::string DEFAULT_HEADER_STRING;
 
 private: //service
@@ -114,6 +116,8 @@ private: //members
 	int m_inLineQuantity;
     int m_cInLineCalls;
 
+	int m_maxTableWidth;
+
     std::string m_inlineBuffer;
     bool m_enableAutoSpacing;
 
@@ -124,6 +128,7 @@ void Debug::Line(Arg&& arg, Args&&... args) {
     InLineEnd();
     InLineResetQuantity();
 
+
     std::stringstream ss;
     ss << std::forward<Arg>(arg);
     using expander = int[];
@@ -131,6 +136,10 @@ void Debug::Line(Arg&& arg, Args&&... args) {
                               << std::forward<Args>(args)),0)...};
 
     std::string res = ss.str();
+
+	if (res.size() >= m_maxTableWidth) {
+		res.insert(m_maxTableWidth, "\n");
+	}
 
     SaveInput(res);
 }
