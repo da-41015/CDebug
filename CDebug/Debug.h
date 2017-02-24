@@ -43,10 +43,11 @@ private: //definitions
 	class Metrics {
     public:
         Metrics(int w=2);
-
         void setWidth(int width);
         int getContentWidth() const;
         int getTableWidth() const;
+	public:
+		enum {DEFAULT_TABLE_MAX_WIDTH = 160};
     private:
         int m_tableWidth;
         int m_contentWidth;
@@ -84,8 +85,7 @@ private: //definitions
     };
 
     typedef std::list<Section> SectionList;
-    enum {DEFAULT_LINE_LENGTH = 20,
-	      DEFAULT_TABLE_MAXWIDTH = 128};
+	enum { DEFAULT_LINE_LENGTH = 20 };
 	
     static const std::string DEFAULT_HEADER_STRING;
 

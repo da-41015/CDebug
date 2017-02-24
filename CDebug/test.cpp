@@ -3,7 +3,7 @@
 #include <iostream>
 
 int main() { 
-/*
+
 Debug d("main");
 	
 	d.Line("Example line");
@@ -18,22 +18,20 @@ d.NewSection(true, "Inline example with quantity option");
 
 d.NewSection(true, "Alignment sample");
 
-	d.SetSectionAlignment(Debug::ALIGN_RIGHT);
-	d.Line("kyky");
-
+	
 d.NewSection(true, "Tabulations sample");
 	d.InLineSetQuantity(4);
 	for (int i = 0; i < 16; ++i) {
 		d.InLine(i, "\t");
 	}
 
+	d.NewSection(true);
+
+	d.Line("vstavit kortenky ;ja sj;kasd fkj;l dfsajk; as dfasdf asdf asdf asdfasd ");
+	d.SetSectionAlignment(Debug::ALIGN_RIGHT);
+
 d.End();
 	std::cin.get();
-*/
 
-	std::string s(150, 'c');
-	Debug d("lalala");
-	d.Line(s);
-	d.End();
-	std::cin.get();
+
 }

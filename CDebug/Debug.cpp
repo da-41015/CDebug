@@ -14,7 +14,9 @@ Debug::Metrics::Metrics(int w) {
 }
 
 void Debug::Metrics::setWidth(int width) {
-    if(width & 1)
+	if (width > DEFAULT_TABLE_MAX_WIDTH)
+		width = DEFAULT_TABLE_MAX_WIDTH;
+   else if(width & 1)
         ++width;
 
     m_tableWidth = width;
@@ -54,18 +56,24 @@ void Debug::Section::addLine(const std::string &s) {
 }
 
 void Debug::Section::Markup() {
-
-    EmptyLine();
+	std::string tempBuf;
+    
+	EmptyLine();
 
     int leftPadding = CalcLeftPadding();
-
+	int contentWidth = m_metrics.getContentWidth();
     if(m_visibleSeparator) {
         MakeTitle();
     }
 
     for(auto &i:m_lines) {
-        PrintLine(i, leftPadding);
-    }
+		if (i.size() >= contentWidth) {
+			tempBuf = i.substr(0, contentWidth-1);
+			i.erase(0, contentWidth-1);
+			PrintLine(tempBuf, leftPadding);
+		}
+		PrintLine(i, leftPadding);
+	}
 }
 
 inline void Debug::Section::PrintLine(const std::string &s, int leftPadding) {
@@ -114,7 +122,7 @@ void Debug::Section::PrintSeparatorLine(int val) {
 inline int Debug::Section::CalcLeftPadding() {
     int leftPadding = (m_metrics.getContentWidth() - m_maxLineLength)/2;
 
-    if(leftPadding>1) {
+    if(leftPadding > 1 && leftPadding < Metrics::DEFAULT_TABLE_MAX_WIDTH) {
 
         switch(m_alignment) {
 
@@ -131,7 +139,10 @@ inline int Debug::Section::CalcLeftPadding() {
         break;
 
         }
-    }
+	}
+	else {
+		leftPadding = 1;
+	}
 
     return leftPadding;
 }
