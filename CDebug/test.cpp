@@ -4,6 +4,7 @@
 
 int main() { 
 
+
 Debug d("main");
 	
 	d.Line("Example line");
@@ -17,7 +18,8 @@ d.NewSection(true, "Inline example with quantity option");
 	}
 
 d.NewSection(true, "Alignment sample");
-
+	d.SetSectionAlignment(Debug::ALIGN_RIGHT);
+	d.Line("Some text");
 	
 d.NewSection(true, "Tabulations sample");
 	d.InLineSetQuantity(4);
@@ -25,13 +27,17 @@ d.NewSection(true, "Tabulations sample");
 		d.InLine(i, "\t");
 	}
 
-	d.NewSection(true);
-
-	d.Line("vstavit kortenky ;ja sj;kasd fkj;l dfsajk; as dfasdf asdf asdf asdfasd ");
-	d.SetSectionAlignment(Debug::ALIGN_RIGHT);
+d.NewSection(true, "Too long string sample");
+	d.InLineResetQuantity();
+	d.DisableAutoSpacing();
+	for (int i = 0; i < 100; ++i) {
+		d.InLine(i, " ");
+	}
+	
 
 d.End();
 	std::cin.get();
+
 
 
 }

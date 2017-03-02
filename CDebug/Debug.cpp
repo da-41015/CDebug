@@ -61,13 +61,13 @@ void Debug::Section::Markup() {
 	EmptyLine();
 
     int leftPadding = CalcLeftPadding();
-	int contentWidth = m_metrics.getContentWidth();
+	std::size_t contentWidth = m_metrics.getContentWidth();
     if(m_visibleSeparator) {
         MakeTitle();
     }
 
     for(auto &i:m_lines) {
-		if (i.size() >= contentWidth) {
+		while(i.size() >= contentWidth) {
 			tempBuf = i.substr(0, contentWidth-1);
 			i.erase(0, contentWidth-1);
 			PrintLine(tempBuf, leftPadding);
