@@ -273,12 +273,19 @@ Debug::Debug(const std::string &subject):m_subject(subject),
 										 m_enableAutoSpacing(true) 
 {
     m_subject = DEFAULT_HEADER_STRING + m_subject;
-    m_metrics.setWidth(DEFAULT_LINE_LENGTH + subject.size() + DEFAULT_HEADER_STRING.size());
+	FilterHeader(m_subject);
+    
+	m_metrics.setWidth(DEFAULT_LINE_LENGTH + subject.size() + DEFAULT_HEADER_STRING.size());
     m_sections.push_back(Section(m_metrics));
     m_itCurrentSection = m_sections.begin();
 
     InLineResetQuantity();
-    Debug::FilterHeader(m_subject);
+}
+
+void Debug::SetSubject(const std::string& s) {
+	m_subject = s;
+	FilterHeader(m_subject);
+	calibrateMetrics(s.size());
 }
 
 void Debug::NewSection(bool enableSubheader, const std::string &title) {

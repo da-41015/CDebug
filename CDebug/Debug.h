@@ -29,6 +29,8 @@ public:
     void EnableAutoSpacing()  {m_enableAutoSpacing = true;}
 	//Установить выравнинвание текущей секции
     void SetSectionAlignment(ALIGNMENT A) {m_itCurrentSection->SetAlignment(A);}
+	//установить новый заголовок
+	void SetSubject(const std::string& );
 	//Установливает/сбрасывает через сколько вызовов InLine стоит вызывать перенос строки.
 	//0 - отключить = default
     void InLineSetQuantity(int a) {m_cInLineCalls = 0; m_inLineQuantity = a;}

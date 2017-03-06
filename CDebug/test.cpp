@@ -6,7 +6,7 @@ int main() {
 
 
 Debug d("main");
-	
+d.SetSubject("Logger");
 	d.Line("Example line");
 	
 d.NewSection(true, "Inline example with quantity option");
